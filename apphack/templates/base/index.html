@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉcoBike - Location de vélos électriques</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+  /* Base Styles */
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #2196f3;
+  --background-color: #f5f5f5;
+  --text-color: #333333;
+  --light-text: #666666;
+  --white: #ffffff;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  background-color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  font-size: 1rem;
+}
+
+.btn i {
+  margin-right: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: #3d9c40;
+  color: var(--white);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background-color: #1a86db;
+  color: var(--white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--gray-300);
+  background-color: var(--white);
+  color: var(--gray-700);
+  flex: 1;
+}
+
+.btn-google:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-apple:hover {
+  background-color: #f8f9fa;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--gray-700);
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--gray-700);
+}
+
+/* Pages Container */
+.pages-container {
+  flex: 1;
+  position: relative;
+}
+
+.page {
+  display: none;
+  padding: 2rem;
+  min-height: calc(100vh - 80px - 300px); /* Navbar height and footer height */
+}
+
+.page.active {
+  display: block;
+}
+
+/* Home Page Styles */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  margin-bottom: 3rem;
+}
+
+.hero-content {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--gray-700);
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  max-height: 400px;
+}
+
+.features {
+  margin-bottom: 3rem;
+}
+
+.features h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--gray-800);
+}
+
+.feature-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.feature-card {
+  flex: 1;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.feature-icon i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.feature-card h3 {
+  margin-bottom: 1rem;
+  color: var(--gray-800);
+}
+
+.feature-card p {
+  color: var(--gray-600);
+}
+
+.benefits {
+  display: flex;
+  align-items: center;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  margin-bottom: 3rem;
+}
+
+.benefit-content {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.benefit-content h2 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+}
+
+.benefit-list {
+  list-style: none;
+}
+
+.benefit-list li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.benefit-list li i {
+  color: var(--primary-color);
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.benefit-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.benefit-image img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+/* Auth Page Styles */
+.auth-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-tab.active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.auth-form {
+  display: none;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-check input {
+  margin-right: 0.5rem;
+}
+
+.social-login {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.social-login p {
+  color: var(--gray-600);
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: var(--gray-300);
+}
+
+.social-login p::before {
+  left: 0;
+}
+
+.social-login p::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Weather Section Styles */
+.weather-section {
+  margin-bottom: 1.5rem;
+}
+
+.weather-container {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.weather-header h3 {
+  margin-bottom: 0;
+  color: var(--gray-800);
+}
+
+.weather-location {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+
+.weather-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(33, 150, 243, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-icon i {
+  font-size: 2rem;
+  color: var(--secondary-color);
+}
+
+.weather-temp {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-temp .temp {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.weather-temp .feels-like {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+
+.weather-details {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.weather-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.weather-detail i {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.weather-detail span {
+  color: var(--gray-700);
+}
+
+.weather-forecast {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.forecast-item .day {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+}
+
+.forecast-item i {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.forecast-item .temp {
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+@media (max-width: 768px) {
+  .weather-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .weather-details {
+    justify-content: space-between;
+  }
+
+  .weather-forecast {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .forecast-item {
+    min-width: 70px;
+  }
+}
+
+/* Map Page Styles */
+.map-container {
+  position: relative;
+  height: calc(100vh - 80px - 80px); /* Navbar height and padding */
+}
+
+.map-filters {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.filter-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 0.5rem;
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-btn i {
+  margin-right: 0.5rem;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  background-color: #e9ecef;
+  position: relative;
+}
+
+.map-placeholder {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0.7;
+}
+
+.kiosk-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 5;
+}
+
+.marker-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.marker-icon:hover {
+  transform: scale(1.1);
+}
+
+.marker-icon.available {
+  border: 3px solid var(--primary-color);
+}
+
+.marker-icon.full {
+  border: 3px solid var(--danger-color);
+}
+
+.marker-icon i {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.marker-icon span {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.rent-btn {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup.active {
+  display: flex;
+}
+
+.popup-content {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header h3 {
+  margin-bottom: 0;
+  color: var(--gray-800);
+}
+
+.close-popup {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.close-popup:hover {
+  color: var(--danger-color);
+}
+
+.popup-body {
+  padding: 1.5rem;
+}
+
+.kiosk-image {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.kiosk-image img {
+  max-width: 200px;
+}
+
+.kiosk-info p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.kiosk-info p i {
+  width: 24px;
+  margin-right: 0.75rem;
+  color: var(--primary-color);
+}
+
+.kiosk-info p:last-child {
+  margin-bottom: 1.5rem;
+}
+
+/* Rental Process Styles */
+.rental-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+}
+
+.rental-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.rental-header h2 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+  text-align: center;
+}
+
+.rental-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.rental-steps::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background-color: var(--gray-300);
+  z-index: 1;
+}
+
+.step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--gray-300);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+
+.step.active .step-number {
+  background-color: var(--primary-color);
+}
+
+.step-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  text-align: center;
+}
+
+.step.active .step-label {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.rental-content {
+  padding: 2rem;
+}
+
+.rental-step-content {
+  display: none;
+}
+
+.rental-step-content.active {
+  display: block;
+}
+
+.rental-step-content h3 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+  text-align: center;
+}
+
+.bike-selection {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.bike-card {
+  flex: 1;
+  min-width: 200px;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.bike-card.selected {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.bike-image {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.bike-image img {
+  max-height: 120px;
+}
+
+.bike-info h4 {
+  margin-bottom: 0.5rem;
+  color: var(--gray-800);
+}
+
+.bike-info p {
+  color: var(--gray-600);
+  margin-bottom: 0.75rem;
+}
+
+.bike-info ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: var(--gray-700);
+}
+
+.duration-selection {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.duration-card {
+  flex: 1;
+  min-width: 150px;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.duration-card.selected {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.duration-icon {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.duration-icon i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.duration-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--gray-800);
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.payment-summary {
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--gray-700);
+}
+
+.summary-item.total {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-300);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--gray-900);
+}
+
+.payment-methods {
+  margin-bottom: 2rem;
+}
+
+.payment-methods h4 {
+  margin-bottom: 1rem;
+  color: var(--gray-800);
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.payment-method.selected {
+  border-color: var(--primary-color);
+  background-color: rgba(76, 175, 80, 0.05);
+}
+
+.payment-method input {
+  margin-right: 1rem;
+}
+
+.payment-method label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+
+.payment-method label i {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.step-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.confirmation-icon {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-icon i {
+  font-size: 4rem;
+  color: var(--success-color);
+}
+
+.qr-code {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.qr-code img {
+  max-width: 200px;
+}
+
+.qr-info {
+  text-align: center;
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+}
+
+.timer {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* Profile Page Styles */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--gray-100);
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 2rem;
+  border: 3px solid var(--white);
+  box-shadow: var(--box-shadow);
+}
+
+.profile-info h2 {
+  margin-bottom: 0.25rem;
+  color: var(--gray-800);
+}
+
+.profile-info p {
+  color: var(--gray-600);
+  margin-bottom: 1rem;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.profile-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.profile-tab {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.profile-tab.active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.profile-tab-content {
+  display: none;
+  padding: 2rem;
+}
+
+.profile-tab-content.active {
+  display: block;
+}
+
+.rental-history {
+  margin-top: 1.5rem;
+}
+
+.rental-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.rental-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+}
+
+.rental-icon i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.rental-details {
+  flex: 1;
+}
+
+.rental-details h4 {
+  margin-bottom: 0.25rem;
+  color: var(--gray-800);
+}
+
+.rental-details p {
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+}
+
+.rental-route {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.rental-price {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.subscription-card {
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.subscription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.subscription-header h4 {
+  margin-bottom: 0;
+  color: var(--gray-800);
+}
+
+.subscription-badge {
+  background-color: var(--success-color);
+  color: var(--white);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.subscription-details p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.subscription-details p i {
+  width: 24px;
+  margin-right: 0.75rem;
+  color: var(--primary-color);
+}
+
+.subscription-details p:last-child {
+  margin-bottom: 1.5rem;
+}
+
+.offers {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.offer-card {
+  flex: 1;
+  min-width: 250px;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  border: 1px solid var(--gray-200);
+}
+
+.offer-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--warning-color);
+  color: var(--gray-900);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.offer-card h4 {
+  margin-bottom: 1rem;
+  color: var(--gray-800);
+}
+
+.offer-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.original {
+  text-decoration: line-through;
+  color: var(--gray-500);
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.offer-features {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.offer-features li {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.offer-features li::before {
+  content: "✓";
+  position: absolute;
+  left: -1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+}
+
+.settings-section h4 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 0.5rem;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.setting-label {
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-300);
+  transition: var(--transition);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: var(--transition);
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.save-settings {
+  margin-bottom: 1rem;
+}
+
+/* Contact Page Styles */
+.contact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact-header h2 {
+  color: var(--gray-800);
+  margin-bottom: 1rem;
+}
+
+.contact-header p {
+  color: var(--gray-600);
+  font-size: 1.1rem;
+}
+
+.contact-content {
+  display: flex;
+  gap: 3rem;
+}
+
+.contact-form {
+  flex: 1;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.contact-form h3 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h3 {
+  margin-bottom: 1.5rem;
+  color: var(--gray-800);
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 1rem;
+  background-color: var(--gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-question h4 {
+  margin-bottom: 0;
+  color: var(--gray-800);
+  font-size: 1rem;
+}
+
+.faq-answer {
+  padding: 1rem;
+  background-color: var(--white);
+  display: none;
+}
+
+.faq-answer.active {
+  display: block;
+}
+
+.contact-methods {
+  margin-top: 2rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.contact-method i {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.contact-method h4 {
+  margin-bottom: 0.25rem;
+  color: var(--gray-800);
+}
+
+.contact-method p {
+  color: var(--gray-600);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--gray-800);
+  color: var(--white);
+  padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.footer-logo img {
+  height: 40px;
+  margin-right: 0.5rem;
+  filter: brightness(0) invert(1);
+}
+
+.footer-logo h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  color: var(--white);
+}
+
+.footer-links {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-column h3 {
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-column ul li a {
+  color: var(--gray-400);
+  transition: var(--transition);
+}
+
+.footer-column ul li a:hover {
+  color: var(--white);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.app-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.app-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.app-link i {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.app-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-bottom-links a {
+  color: var(--gray-500);
+  transition: var(--transition);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--white);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .feature-cards {
+    flex-direction: column;
+  }
+
+  .benefits {
+    flex-direction: column;
+  }
+
+  .benefit-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .contact-content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-buttons .btn {
+    display: none;
+  }
+
+  .page {
+    padding: 1rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-stats {
+    justify-content: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bike-selection,
+  .duration-selection {
+    flex-direction: column;
+  }
+
+  .step-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .step-buttons .btn {
+    width: 100%;
+  }
+
+  .offers {
+    flex-direction: column;
+  }
+}
+
+</style>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="ÉcoBike Logo">
+                <h1>ÉcoBike</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Accueil</a>
+                <a href="#" id="kiosks-link">Kiosques</a>
+                <a href="#" id="pricing-link">Tarifs</a>
+                <a href="#" id="contact-link">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <button id="login-btn" class="btn btn-outline">Se connecter</button>
+                <button id="register-btn" class="btn btn-primary">S'inscrire</button>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Pages Container -->
+        <div class="pages-container">
+            <!-- Home Page -->
+            <section id="home-page" class="page active">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1>Pédalez vers une ville plus verte !</h1>
+                        <p>Louez un vélo électrique en quelques clics et contribuez à une mobilité urbaine durable.</p>
+                        <div class="hero-buttons">
+                            <button id="discover-btn" class="btn btn-primary btn-large">Découvrir les kiosques</button>
+                            <button id="register-hero-btn" class="btn btn-secondary btn-large">S'inscrire</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="images/hero-bike.png" alt="Vélo électrique">
+                    </div>
+                </div>
+
+                <div class="features">
+                    <h2>Comment ça marche ?</h2>
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Localisez</h3>
+                            <p>Trouvez le kiosque le plus proche sur notre carte interactive</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bicycle"></i>
+                            </div>
+                            <h3>Réservez</h3>
+                            <p>Choisissez votre vélo et la durée de location</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <h3>Déverrouillez</h3>
+                            <p>Scannez le QR code et partez à l'aventure</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits">
+                    <div class="benefit-content">
+                        <h2>Pourquoi choisir ÉcoBike ?</h2>
+                        <ul class="benefit-list">
+                            <li><i class="fas fa-leaf"></i> Écologique : zéro émission de CO2</li>
+                            <li><i class="fas fa-bolt"></i> Rapide : assistance électrique jusqu'à 25 km/h</li>
+                            <li><i class="fas fa-wallet"></i> Économique : tarifs adaptés à tous les budgets</li>
+                            <li><i class="fas fa-heart"></i> Santé : restez en forme tout en vous déplaçant</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-image">
+                        <img src="images/city-map.png" alt="Carte urbaine">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Login/Register Page -->
+            <section id="auth-page" class="page">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">Se connecter</button>
+                        <button class="auth-tab" data-tab="register">S'inscrire</button>
+                    </div>
+
+                    <div id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="votre@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Mot de passe</label>
+                            <input type="password" id="login-password" placeholder="Votre mot de passe">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me">Se souvenir de moi</label>
+                        </div>
+                        <button class="btn btn-primary btn-block">Me connecter</button>
+                        <div class="social-login">
+                            <p>Ou connectez-vous avec</p>
+                            <div class="social-buttons">
+                                <button class="btn btn-social btn-google">
+                                    <i class="fab fa-google"></i> Google
+                                </button>
+                                <button class="btn btn-social btn-apple">
+                                    <i class="fab fa-apple"></i> Apple
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="register-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-firstname">Prénom</label>
+                            <input type="text" id="register-firstname" placeholder="Votre prénom">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-lastname">Nom</label>
+                            <input type="text" id="register-lastname" placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" placeholder="votre@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Mot de passe</label>
+                            <input type="password" id="register-password" placeholder="Créez un mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-role">Vous êtes</label>
+                            <select id="register-role">
+                                <option value="student">Étudiant</option>
+                                <option value="professional">Professionnel</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="terms">
+                            <label for="terms">J'accepte les conditions d'utilisation</label>
+                        </div>
+                        <button class="btn btn-primary btn-block">Créer un compte</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map Page -->
+            <section id="map-page" class="page">
+                <div class="weather-section">
+                    <div class="weather-container">
+                        <div class="weather-header">
+                            <h3>Météo locale</h3>
+                            <span class="weather-location">Paris, France</span>
+                        </div>
+                        <div class="weather-content">
+                            <div class="weather-current">
+                                <div class="weather-icon">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="weather-temp">
+                                    <span class="temp">22°C</span>
+                                    <span class="feels-like">Ressenti: 24°C</span>
+                                </div>
+                            </div>
+                            <div class="weather-details">
+                                <div class="weather-detail">
+                                    <i class="fas fa-wind"></i>
+                                    <span>12 km/h</span>
+                                </div>
+                                <div class="weather-detail">
+                                    <i class="fas fa-tint"></i>
+                                    <span>20%</span>
+                                </div>
+                                <div class="weather-detail">
+                                    <i class="fas fa-cloud-sun"></i>
+                                    <span>Ensoleillé</span>
+                                </div>
+                            </div>
+                            <div class="weather-forecast">
+                                <div class="forecast-item">
+                                    <span class="day">Aujourd'hui</span>
+                                    <i class="fas fa-sun"></i>
+                                    <span class="temp">22°C</span>
+                                </div>
+                                <div class="forecast-item">
+                                    <span class="day">Demain</span>
+                                    <i class="fas fa-cloud-sun"></i>
+                                    <span class="temp">20°C</span>
+                                </div>
+                                <div class="forecast-item">
+                                    <span class="day">Mer</span>
+                                    <i class="fas fa-cloud"></i>
+                                    <span class="temp">18°C</span>
+                                </div>
+                                <div class="forecast-item">
+                                    <span class="day">Jeu</span>
+                                    <i class="fas fa-cloud-rain"></i>
+                                    <span class="temp">17°C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="map-filters">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Rechercher un lieu...">
+                        </div>
+                        <div class="filter-options">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-bicycle"></i> Tous
+                            </button>
+                            <button class="filter-btn" data-filter="available">
+                                <i class="fas fa-check-circle"></i> Disponibles
+                            </button>
+                            <button class="filter-btn" data-filter="full">
+                                <i class="fas fa-parking"></i> Bornes libres
+                            </button>
+                        </div>
+                    </div>
+                    <div id="map" class="map">
+                        <!-- Map will be rendered here with JavaScript -->
+                        <div class="map-placeholder">
+                            <img src="images/map-placeholder.png" alt="Carte interactive">
+                            <!-- Kiosk markers will be added dynamically -->
+                            <div class="kiosk-marker" style="top: 30%; left: 40%;" data-id="1">
+                                <div class="marker-icon available">
+                                    <i class="fas fa-bicycle"></i>
+                                    <span>5</span>
+                                </div>
+                            </div>
+                            <div class="kiosk-marker" style="top: 50%; left: 60%;" data-id="2">
+                                <div class="marker-icon available">
+                                    <i class="fas fa-bicycle"></i>
+                                    <span>3</span>
+                                </div>
+                            </div>
+                            <div class="kiosk-marker" style="top: 65%; left: 25%;" data-id="3">
+                                <div class="marker-icon full">
+                                    <i class="fas fa-bicycle"></i>
+                                    <span>0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary rent-btn">
+                        <i class="fas fa-bicycle"></i> Louer un vélo
+                    </button>
+                </div>
+
+                <!-- Kiosk Detail Popup -->
+                <div id="kiosk-popup" class="popup">
+                    <div class="popup-content">
+                        <div class="popup-header">
+                            <h3>Kiosque Gare Centrale</h3>
+                            <button class="close-popup"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="popup-body">
+                            <div class="kiosk-image">
+                                <img src="images/kiosk.png" alt="Kiosque">
+                            </div>
+                            <div class="kiosk-info">
+                                <p><i class="fas fa-bicycle"></i> <strong>5</strong> vélos disponibles</p>
+                                <p><i class="fas fa-parking"></i> <strong>3</strong> emplacements libres</p>
+                                <p><i class="fas fa-map-marker-alt"></i> <strong>300m</strong> de votre position</p>
+                                <p><i class="fas fa-clock"></i> Ouvert 24h/24</p>
+                            </div>
+                            <button class="btn btn-primary btn-block reserve-btn">Réserver un vélo</button>
+                            <button class="btn btn-outline btn-block">
+                                <i class="fas fa-directions"></i> Itinéraire
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rental Process Page -->
+            <section id="rental-page" class="page">
+                <div class="rental-container">
+                    <div class="rental-header">
+                        <h2>Location de vélo</h2>
+                        <div class="rental-steps">
+                            <div class="step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Choix du vélo</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Durée</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Paiement</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rental-content">
+                        <!-- Step 1: Bike Selection -->
+                        <div class="rental-step-content active" data-step="1">
+                            <h3>Choisissez votre vélo</h3>
+                            <div class="bike-selection">
+                                <div class="bike-card selected">
+                                    <div class="bike-image">
+                                        <img src="images/bike-city.png" alt="Vélo City">
+                                    </div>
+                                    <div class="bike-info">
+                                        <h4>City Bike</h4>
+                                        <p>Parfait pour la ville</p>
+                                        <ul>
+                                            <li>Autonomie: 50km</li>
+                                            <li>Vitesse max: 25km/h</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bike-card">
+                                    <div class="bike-image">
+                                        <img src="images/bike-sport.png" alt="Vélo Sport">
+                                    </div>
+                                    <div class="bike-info">
+                                        <h4>Sport Bike</h4>
+                                        <p>Pour les trajets rapides</p>
+                                        <ul>
+                                            <li>Autonomie: 40km</li>
+                                            <li>Vitesse max: 30km/h</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bike-card">
+                                    <div class="bike-image">
+                                        <img src="images/bike-cargo.png" alt="Vélo Cargo">
+                                    </div>
+                                    <div class="bike-info">
+                                        <h4>Cargo Bike</h4>
+                                        <p>Pour transporter des charges</p>
+                                        <ul>
+                                            <li>Autonomie: 35km</li>
+                                            <li>Vitesse max: 20km/h</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-buttons">
+                                <button class="btn btn-outline back-btn">Retour</button>
+                                <button class="btn btn-primary next-btn" data-next="2">Suivant</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Duration Selection -->
+                        <div class="rental-step-content" data-step="2">
+                            <h3>Choisissez la durée</h3>
+                            <div class="duration-selection">
+                                <div class="duration-card selected">
+                                    <div class="duration-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <h4>30 minutes</h4>
+                                    <p class="price">2,50 €</p>
+                                </div>
+                                <div class="duration-card">
+                                    <div class="duration-icon">
+                                        <i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <h4>1 heure</h4>
+                                    <p class="price">4,00 €</p>
+                                </div>
+                                <div class="duration-card">
+                                    <div class="duration-icon">
+                                        <i class="fas fa-sun"></i>
+                                    </div>
+                                    <h4>Journée</h4>
+                                    <p class="price">15,00 €</p>
+                                </div>
+                            </div>
+                            <div class="step-buttons">
+                                <button class="btn btn-outline back-btn" data-prev="1">Retour</button>
+                                <button class="btn btn-primary next-btn" data-next="3">Suivant</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Payment -->
+                        <div class="rental-step-content" data-step="3">
+                            <h3>Paiement</h3>
+                            <div class="payment-summary">
+                                <div class="summary-item">
+                                    <span>Vélo</span>
+                                    <span>City Bike</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Durée</span>
+                                    <span>30 minutes</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span>Total</span>
+                                    <span>2,50 €</span>
+                                </div>
+                            </div>
+                            <div class="payment-methods">
+                                <h4>Moyen de paiement</h4>
+                                <div class="payment-method selected">
+                                    <input type="radio" name="payment" id="card" checked>
+                                    <label for="card">
+                                        <i class="fas fa-credit-card"></i>
+                                        Carte bancaire
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" name="payment" id="applepay">
+                                    <label for="applepay">
+                                        <i class="fab fa-apple-pay"></i>
+                                        Apple Pay
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" name="payment" id="wallet">
+                                    <label for="wallet">
+                                        <i class="fas fa-wallet"></i>
+                                        Wallet étudiant
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="step-buttons">
+                                <button class="btn btn-outline back-btn" data-prev="2">Retour</button>
+                                <button class="btn btn-primary confirm-btn">Confirmer et déverrouiller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirmation Popup -->
+                <div id="confirmation-popup" class="popup">
+                    <div class="popup-content">
+                        <div class="popup-header">
+                            <h3>Location confirmée !</h3>
+                            <button class="close-popup"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="popup-body">
+                            <div class="confirmation-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <p>Votre vélo est déverrouillé et prêt à l'emploi.</p>
+                            <div class="qr-code">
+                                <img src="images/qr-code.png" alt="QR Code">
+                            </div>
+                            <p class="qr-info">Scannez ce QR code au kiosque pour déverrouiller votre vélo</p>
+                            <p class="timer">Temps restant: <span id="rental-timer">30:00</span></p>
+                            <button class="btn btn-primary btn-block">Commencer à rouler</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Page -->
+            <section id="profile-page" class="page">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img src="images/avatar.png" alt="Avatar">
+                        </div>
+                        <div class="profile-info">
+                            <h2>Sophie Martin</h2>
+                            <p>sophie.martin@email.com</p>
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Locations</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">87</span>
+                                    <span class="stat-label">km parcourus</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">15</span>
+                                    <span class="stat-label">kg CO2 économisés</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" data-tab="history">Historique</button>
+                        <button class="profile-tab" data-tab="subscription">Abonnement</button>
+                        <button class="profile-tab" data-tab="settings">Paramètres</button>
+                    </div>
+
+                    <div id="history-tab" class="profile-tab-content active">
+                        <h3>Historique des locations</h3>
+                        <div class="rental-history">
+                            <div class="rental-item">
+                                <div class="rental-icon">
+                                    <i class="fas fa-bicycle"></i>
+                                </div>
+                                <div class="rental-details">
+                                    <h4>City Bike - Kiosque Gare Centrale</h4>
+                                    <p>15 mai 2023 - 30 minutes</p>
+                                    <div class="rental-route">
+                                        <span>2,5 km parcourus</span>
+                                    </div>
+                                </div>
+                                <div class="rental-price">
+                                    2,50 €
+                                </div>
+                            </div>
+                            <div class="rental-item">
+                                <div class="rental-icon">
+                                    <i class="fas fa-bicycle"></i>
+                                </div>
+                                <div class="rental-details">
+                                    <h4>Sport Bike - Kiosque Université</h4>
+                                    <p>10 mai 2023 - 1 heure</p>
+                                    <div class="rental-route">
+                                        <span>8,2 km parcourus</span>
+                                    </div>
+                                </div>
+                                <div class="rental-price">
+                                    4,00 €
+                                </div>
+                            </div>
+                            <div class="rental-item">
+                                <div class="rental-icon">
+                                    <i class="fas fa-bicycle"></i>
+                                </div>
+                                <div class="rental-details">
+                                    <h4>City Bike - Kiosque Parc Central</h4>
+                                    <p>5 mai 2023 - Journée</p>
+                                    <div class="rental-route">
+                                        <span>15,8 km parcourus</span>
+                                    </div>
+                                </div>
+                                <div class="rental-price">
+                                    15,00 €
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subscription-tab" class="profile-tab-content">
+                        <h3>Mon abonnement</h3>
+                        <div class="subscription-card">
+                            <div class="subscription-header">
+                                <h4>Abonnement Étudiant</h4>
+                                <span class="subscription-badge">Actif</span>
+                            </div>
+                            <div class="subscription-details">
+                                <p><i class="fas fa-calendar-alt"></i> Expire le 15 juin 2023</p>
+                                <p><i class="fas fa-ticket-alt"></i> 5 locations gratuites restantes</p>
+                            </div>
+                            <button class="btn btn-outline btn-block">Renouveler</button>
+                        </div>
+
+                        <h3>Offres spéciales</h3>
+                        <div class="offers">
+                            <div class="offer-card">
+                                <div class="offer-badge">-50%</div>
+                                <h4>Pass Mensuel</h4>
+                                <p class="offer-price"><span class="original">30€</span> 15€</p>
+                                <ul class="offer-features">
+                                    <li>Locations illimitées de 30 min</li>
+                                    <li>Support prioritaire</li>
+                                    <li>Réservation à l'avance</li>
+                                </ul>
+                                <button class="btn btn-primary btn-block">Souscrire</button>
+                            </div>
+                            <div class="offer-card">
+                                <div class="offer-badge">Populaire</div>
+                                <h4>Pass Étudiant</h4>
+                                <p class="offer-price">10€/mois</p>
+                                <ul class="offer-features">
+                                    <li>10 locations de 30 min</li>
+                                    <li>Tarif réduit sur les locations longues</li>
+                                    <li>Valable avec carte étudiante</li>
+                                </ul>
+                                <button class="btn btn-primary btn-block">Souscrire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="settings-tab" class="profile-tab-content">
+                        <h3>Paramètres</h3>
+                        <div class="settings-section">
+                            <h4>Préférences</h4>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Mode sombre</span>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="dark-mode-toggle">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Notifications push</span>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Langue</span>
+                                </div>
+                                <div class="setting-control">
+                                    <select>
+                                        <option value="fr">Français</option>
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Compte</h4>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Email</span>
+                                </div>
+                                <div class="setting-control">
+                                    <input type="email" value="sophie.martin@email.com">
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Mot de passe</span>
+                                </div>
+                                <div class="setting-control">
+                                    <button class="btn btn-outline btn-sm">Modifier</button>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <span>Moyens de paiement</span>
+                                </div>
+                                <div class="setting-control">
+                                    <button class="btn btn-outline btn-sm">Gérer</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block save-settings">Enregistrer les modifications</button>
+                        <button class="btn btn-outline btn-block logout">Se déconnecter</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="contact-page" class="page">
+                <div class="contact-container">
+                    <div class="contact-header">
+                        <h2>Besoin d'aide ?</h2>
+                        <p>Notre équipe est à votre disposition pour répondre à toutes vos questions.</p>
+                    </div>
+
+                    <div class="contact-content">
+                        <div class="contact-form">
+                            <h3>Contactez-nous</h3>
+                            <div class="form-group">
+                                <label for="contact-name">Nom</label>
+                                <input type="text" id="contact-name" placeholder="Votre nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" placeholder="votre@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject">Sujet</label>
+                                <select id="contact-subject">
+                                    <option value="question">Question générale</option>
+                                    <option value="problem">Problème technique</option>
+                                    <option value="billing">Facturation</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" placeholder="Votre message..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-block">Envoyer</button>
+                        </div>
+
+                        <div class="contact-info">
+                            <h3>FAQ</h3>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h4>Comment fonctionne la location ?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Localisez un kiosque sur la carte, choisissez votre vélo et la durée, puis déverrouillez-le avec le QR code après paiement.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h4>Que faire en cas de problème avec un vélo ?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Signalez le problème via l'application et retournez le vélo au kiosque le plus proche. Nous vous rembourserons la location.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h4>Comment obtenir un abonnement étudiant ?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Inscrivez-vous avec votre email universitaire et téléchargez une copie de votre carte étudiante pour validation.</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-methods">
+                                <div class="contact-method">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <h4>Téléphone</h4>
+                                        <p>+33 1 23 45 67 89</p>
+                                    </div>
+                                </div>
+                                <div class="contact-method">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <h4>Email</h4>
+                                        <p>support@ecobike.fr</p>
+                                    </div>
+                                </div>
+                                <div class="contact-method">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h4>Adresse</h4>
+                                        <p>123 Avenue Verte, 75001 Paris</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="ÉcoBike Logo">
+                    <h2>ÉcoBike</h2>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>ÉcoBike</h3>
+                        <ul>
+                            <li><a href="#">À propos</a></li>
+                            <li><a href="#">Nos kiosques</a></li>
+                            <li><a href="#">Tarifs</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Signaler un problème</a></li>
+                            <li><a href="#">Conditions d'utilisation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Suivez-nous</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                        <div class="app-links">
+                            <a href="#" class="app-link">
+                                <i class="fab fa-apple"></i> App Store
+                            </a>
+                            <a href="#" class="app-link">
+                                <i class="fab fa-google-play"></i> Google Play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ÉcoBike. Tous droits réservés.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Confidentialité</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Mentions légales</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
